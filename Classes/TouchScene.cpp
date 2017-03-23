@@ -8,6 +8,7 @@
 
 #include "TouchScene.hpp"
 #include "TouchSprite.hpp"
+#include "HudDialog.hpp"    // remove this once done
 
 USING_NS_CC;
 
@@ -37,6 +38,10 @@ bool TouchScene::init()
     this->addChild(mainCharacter, 1);
     cocos2d::log("TouchScene Init Main is done!");
     
+    HudDialog* hudDialog = new HudDialog();
+    hudDialog->InitDialog();
+    this->addChild(hudDialog);
+    cocos2d::log("Hud Init Main is done!");
     
     return true;
 }
