@@ -39,15 +39,31 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
+    // Set color of the background
+    //director->setClearColor(Color4F(1.0, 1.0, 1.0, 1.0));
+    
     FileUtils::getInstance()->addSearchPath("res");
+    
+    
+    // Load all game assets
+    this->LoadAssets();
+    
 
     // create a scene. it's an autorelease object
     auto scene = TouchScene::createScene();
 
     // run
     director->runWithScene(scene);
+    
 
     return true;
+}
+
+void AppDelegate::LoadAssets()
+{
+    // load the Sprite Sheet and SpriteSheetAnimation
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("cat_walk.plist");
+    AnimationCache::getInstance()->addAnimationsWithFile("cat_walk_anim.plist");
 }
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
