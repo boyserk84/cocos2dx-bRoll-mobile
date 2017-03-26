@@ -7,8 +7,6 @@
 //
 
 #include "TouchScene.hpp"
-#include "TouchSprite.hpp"
-#include "HudDialog.hpp"    // remove this once done
 
 USING_NS_CC;
 
@@ -30,18 +28,20 @@ bool TouchScene::init()
     
     initTouch();
     
+                   
     // Add character
-    auto mainCharacter = TouchSprite::create("Idle (1).png", true);
+    mainCharacter = TouchSprite::create("Walk (1).png", true);
     mainCharacter->setPosition(Vec2(
                                 Director::getInstance()->getVisibleSize().width / 2,
                                    Director::getInstance()->getVisibleSize().height / 2));
     this->addChild(mainCharacter, 1);
     cocos2d::log("TouchScene Init Main is done!");
     
-    HudDialog* hudDialog = new HudDialog();
-    hudDialog->InitDialog();
-    this->addChild(hudDialog);
-    cocos2d::log("Hud Init Main is done!");
+    //HudDialog* hudDialog = new HudDialog();
+    //hudDialog->InitDialog();
+    //this->addChild(hudDialog);
+    //cocos2d::log("Hud Init Main is done!");
+
     
     return true;
 }
@@ -79,6 +79,19 @@ bool TouchScene::onTouchBegan(Touch* touch, Event* event)
 {
     labelTouchInfo->setPosition(touch->getLocation());
     labelTouchInfo->setString("You Touched Here");
+    
+    // Test dispatching event
+    EventCustom cEvent("touchBegin");
+    cocos2d::Vec2* newLoc = new cocos2d::Vec2( touch->getLocation() );
+    cEvent.setUserData( newLoc );
+    //_eventDispatcher->dispatchEvent(&cEvent);
+    //this->gameEventDispatcher->DispatchEvent("TouchScene_TouchBegan", &cEvent);
+    
+    //CC_SAFE_DELETE_ARRAY(newLoc);
+    
+    mainCharacter->OnGameEventReceived("TouchEvent", &cEvent );
+    CC_SAFE_DELETE(newLoc);
+    
     return true;
 }
 

@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include "cocos2d.h"
 
+#include "TouchSprite.hpp"
+#include "HudDialog.hpp"    // remove this once done
+
 class TouchScene:public cocos2d::Layer
 {
 public:
@@ -25,10 +28,14 @@ public:
     virtual void onTouchMoved(cocos2d::Touch*, cocos2d::Event*);
     virtual void onTouchCancelled(cocos2d::Touch*, cocos2d::Event*);
     virtual bool initTouch();
+    
     CREATE_FUNC(TouchScene);
   
 private:
     cocos2d::Label* labelTouchInfo;
+    
+    TouchSprite* mainCharacter;
+    
 };
 
 #endif /* TouchScene_hpp */
