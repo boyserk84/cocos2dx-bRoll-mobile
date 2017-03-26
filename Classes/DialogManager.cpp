@@ -9,9 +9,10 @@
 #include "DialogManager.hpp"
 
 
-
-
-
+/**
+ * Queue and show the given dialog by Id.
+ *
+ */
 void DialogManager::QueueAndShowDialogById(std::string dialogId)
 {
     if ( _dialogs != NULL )
@@ -31,13 +32,22 @@ void DialogManager::QueueAndShowDialogById(std::string dialogId)
     ShowDialogInTheQueue();
 }
 
+/**
+ * Show the current dialog on top of the queue
+ */
 void DialogManager::ShowDialogInTheQueue()
 {
-    //AbstractBaseDialog* d = _queueDialogs->pop_back();
-    // TODO: Implement this
+    AbstractBaseDialog* target = _queueDialogs->back();
+    _queueDialogs->erase(_queueDialogs->end());
     
+    this->addChild( target, _zOrder , target->dialogId );
+    
+    _zOrder++;
 }
 
+/**
+ * Load the given dialog to the memory.
+ */
 void DialogManager::LoadDialog(AbstractBaseDialog* dialog)
 {
     if ( _dialogs != NULL )

@@ -17,5 +17,6 @@ public:
     virtual void InitDialog() = 0;
     virtual void Update() = 0;
     virtual void Destroy() = 0;
+    virtual AbstractBaseDialog* Clone() = 0;
 };
 #endif /* AbstractBaseDialog_hpp */

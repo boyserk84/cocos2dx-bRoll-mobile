@@ -21,11 +21,13 @@ public:
     Label* txtfield_Health;
     
     HudDialog();
+    HudDialog(const HudDialog &source);
     ~HudDialog();
     
     void InitDialog();
     void Update();
     void Destroy();
+    AbstractBaseDialog* Clone();
     
 };
 

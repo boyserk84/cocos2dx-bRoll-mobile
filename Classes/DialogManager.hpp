@@ -28,6 +28,8 @@ private:
     /** List of visible dialogs in the game. */
     std::vector<AbstractBaseDialog*> *_queueDialogs;
     
+    int _zOrder = 0;
+    
 };
 
 
